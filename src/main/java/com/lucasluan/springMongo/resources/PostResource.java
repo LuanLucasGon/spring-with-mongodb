@@ -3,6 +3,7 @@ package com.lucasluan.springMongo.resources;
 import com.lucasluan.springMongo.domain.Post;
 import com.lucasluan.springMongo.domain.User;
 import com.lucasluan.springMongo.dto.UserDTO;
+import com.lucasluan.springMongo.resources.util.URL;
 import com.lucasluan.springMongo.services.PostService;
 import com.lucasluan.springMongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class PostResource {
     public ResponseEntity<Post> findById(@PathVariable String id){
         Post post = postService.findById(id);
         return ResponseEntity.ok().body(post);
+    }
+
+    @GetMapping(value="/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text) {
+        text = URL.decodeParam(text);
+        List<Post> list = postService.findByTitle(text);
+        return ResponseEntity.ok().body(list);
     }
 
 }
