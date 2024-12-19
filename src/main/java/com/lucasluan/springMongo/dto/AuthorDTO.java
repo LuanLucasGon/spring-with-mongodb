@@ -10,11 +10,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AuthorDTIO implements Serializable {
+public class AuthorDTO implements Serializable {
     private String id;
     private String name;
 
-    public AuthorDTIO(User user){
+    public AuthorDTO(User user){
         id = user.getId();
         name = user.getName();
     }
