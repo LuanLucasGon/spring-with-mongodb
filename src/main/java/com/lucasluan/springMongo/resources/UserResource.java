@@ -1,5 +1,6 @@
 package com.lucasluan.springMongo.resources;
 
+import com.lucasluan.springMongo.domain.Post;
 import com.lucasluan.springMongo.domain.User;
 import com.lucasluan.springMongo.dto.UserDTO;
 import com.lucasluan.springMongo.services.UserService;
@@ -52,5 +53,11 @@ public class UserResource {
         user.setId(id);
         userService.update(user);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
